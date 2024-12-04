@@ -1,2 +1,3 @@
 Current Database Schema
-(screenshots/schema.png)
+
+![Screenshot 1](screenshots/schema.png)
