@@ -8,7 +8,7 @@ const router = express.Router();
 router.post('/add', safeRoute, verifyRole('buyer'), addToCart);
 router.put('/update', safeRoute, verifyRole('buyer'), updateCartQuantity);
 router.delete('/remove/:cartId', safeRoute, verifyRole('buyer'), removeFromCart);
-router.delete('/clear', safeRoute, verifyRole('buyer'), clearCart); // New route
+router.delete('/clear', safeRoute, verifyRole('buyer'), clearCart);
 router.get('/', safeRoute, verifyRole('buyer'), getCart);
 
 export default router;
