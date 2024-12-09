@@ -3,6 +3,7 @@ import passport from 'passport';
 import session from 'express-session';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
+import alertRoutes from './routes/alert.js';
 import cartRoutes from './routes/cart.js';
 import passportConfig from './configs/passport.js';
 import { connectMongoDB } from './configs/mongodb.js';
@@ -24,6 +25,7 @@ app.use(passport.session());
 app.use(cors());
 
 app.use('/auth', authRoutes);
+app.use('/alerts', alertRoutes);
 app.use('/cart', cartRoutes);
 
 connectMongoDB();
