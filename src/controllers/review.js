@@ -2,7 +2,7 @@ import Review from '../models/review.js';
 import Transaction from '../models/transaction.js';
 import Product from '../models/product.js';
 
-// Create a review
+// Create a review anjay mabar
 export const createReview = async (req, res) => {
   try {
     const { productId, transactionId, rating, review } = req.body;

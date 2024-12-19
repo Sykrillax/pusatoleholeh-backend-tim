@@ -1,19 +1,23 @@
 import express from 'express';
 import {
-  getAlerts,
   createAlert,
+  createAlertRole,
+  getAlerts,
   deleteAlert,
   deleteAllAlerts,
   markAlertAsRead,
+  markAllAlertsAsRead,
 } from '../controllers/alert.js';
 import { safeRoute, verifyRole } from '../middlewares/middleware.js';
 
 const router = express.Router();
 
-router.get('/', safeRoute, getAlerts); 
-router.post('/create', safeRoute, verifyRole('admin'), createAlert); 
-router.delete('/delete/:alertId', safeRoute, verifyRole('admin'), deleteAlert); 
-router.delete('/delete-all', safeRoute, verifyRole('admin'), deleteAllAlerts); 
-router.put('/mark-read/:alertId', safeRoute, markAlertAsRead); 
+router.post('/create', safeRoute, verifyRole('admin'), createAlert);
+router.post('/create/role', safeRoute, verifyRole('admin'), createAlertRole);
+router.get('/', safeRoute, getAlerts);
+router.delete('/:alertId', safeRoute, deleteAlert);
+router.delete('/', safeRoute, deleteAllAlerts);
+router.put('/:alertId/read', safeRoute, markAlertAsRead); 
+router.put('/read-all', safeRoute, markAllAlertsAsRead);  
 
 export default router;
