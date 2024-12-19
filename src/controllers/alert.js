@@ -1,55 +1,36 @@
 import Alert from '../models/alert.js';
 
-// Get all alerts for a user
+// Get all alerts for the logged-in user's role
 export const getAlerts = async (req, res) => {
   try {
-    const alerts = await Alert.find({ userId: req.user._id });
+    const userRole = req.user.role; 
+    const alerts = await Alert.find({
+      $or: [
+        { target: 'all' },
+        { target: userRole },
+      ],
+    }).sort({ createdAt: -1 }); 
+
     res.status(200).json(alerts);
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
 
-// Create a new alert
+// Create a new alert (broadcast to all or specific roles)
 export const createAlert = async (req, res) => {
   try {
-    const { userId, message, type = 'info' } = req.body;
+    const { message, type = 'info', target = 'all' } = req.body;
 
     const alert = new Alert({
-      userId,
       message,
       type,
+      target,
     });
 
     await alert.save();
     res.status(201).json({ message: 'Alert created successfully.', alert });
   } catch (error) {
-    res.status(500).json({ message: 'Server error.', error: error.message });
-  }
-};
-
-// Update an alert
-export const updateAlert = async (req, res) => {
-  try {
-    const { alertId } = req.params;
-    const { message, type } = req.body;
-
-    if (!message && !type) {
-      return res.status(400).json({ message: 'No fields to update provided.' });
-    }
-
-    const alert = await Alert.findById(alertId);
-    if (!alert) {
-      return res.status(404).json({ message: 'Alert not found.' });
-    }
-
-    if (message) alert.message = message;
-    if (type) alert.type = type;
-
-    await alert.save();
-    res.status(200).json({ message: 'Alert updated successfully.', alert });
-  } catch (error) {
-    console.error('Error updating alert:', error.message);
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
 };
@@ -73,32 +54,8 @@ export const deleteAlert = async (req, res) => {
 // Delete all alerts
 export const deleteAllAlerts = async (req, res) => {
   try {
-    const result = await Alert.deleteMany({ userId: req.user._id });
-    if (result.deletedCount === 0) {
-      return res.status(404).json({ message: 'No alerts found for this user.' });
-    }
-
+    const result = await Alert.deleteMany({});
     res.status(200).json({ message: `${result.deletedCount} alerts deleted successfully.` });
-  } catch (error) {
-    console.error('Error deleting all alerts:', error.message);
-    res.status(500).json({ message: 'Server error.', error: error.message });
-  }
-};
-
-// Toggle alert active status
-export const toggleAlertStatus = async (req, res) => {
-  try {
-    const { alertId } = req.params;
-
-    const alert = await Alert.findById(alertId);
-    if (!alert) {
-      return res.status(404).json({ message: 'Alert not found.' });
-    }
-
-    alert.isActive = !alert.isActive;
-    await alert.save();
-
-    res.status(200).json({ message: 'Alert status toggled successfully.', alert });
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }

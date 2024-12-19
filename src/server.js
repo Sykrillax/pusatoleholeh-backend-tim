@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import alertRoutes from './routes/alert.js';
 import cartRoutes from './routes/cart.js';
+import courierRoutes from './routes/courier.js';
+import voucherRoutes from './routes/voucher.js';
 import passportConfig from './configs/passport.js';
 import { connectMongoDB } from './configs/mongodb.js';
 import cors from 'cors';
@@ -27,6 +29,8 @@ app.use(cors());
 app.use('/auth', authRoutes);
 app.use('/alerts', alertRoutes);
 app.use('/cart', cartRoutes);
+app.use('/courier', courierRoutes);
+app.use('/voucher', voucherRoutes);
 
 connectMongoDB();
 
