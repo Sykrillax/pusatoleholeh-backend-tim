@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 import Cart from '../models/cart.js';
 import Product from '../models/product.js';
 import Shop from '../models/shop.js';
-import ProductImage from '../models/productImage.js';
 import ProductCover from '../models/productCover.js';
 import { createAlert } from './alert.js';
 
@@ -32,7 +31,6 @@ export const addToCart = async (req, res) => {
     }
 
     const productCover = await ProductCover.findOne({ productId }).select('url');
-    const productImages = await ProductImage.find({ productId }).select('url');
 
     const existingCartItem = await Cart.findOne({ userId, productId });
     if (existingCartItem) {
@@ -51,8 +49,7 @@ export const addToCart = async (req, res) => {
       productId,
       shopId: shop._id,
       shopName: shop.name,
-      productCover: productCover?.url || null,
-      productImage: productImages.map(img => img.url),
+      productCover: productCover?.url || null, // Hanya menyimpan product cover
       quantity: quantityInt,
     });
 
