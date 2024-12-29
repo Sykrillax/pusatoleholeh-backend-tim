@@ -3,6 +3,7 @@ Current Database Schema
 ![Screenshot 1](screenshots/schema.png)
 
 
+
 ```
 pusatoleholeh-backend-tim
 ├─ .git
@@ -37,6 +38,8 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 42c23cee2c17c4b56a86a0ec0c6ffbd9d82e84
 │  │  ├─ 06
 │  │  │  └─ 079bd201eb34dbb62ae664da40d970b9137727
+│  │  ├─ 0b
+│  │  │  └─ 2e32682b451f4c7f8650928179ba409e798f51
 │  │  ├─ 0c
 │  │  │  └─ 2c730605dc1326b960ca701f7b6b598509cbe8
 │  │  ├─ 0e
@@ -48,13 +51,17 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 41132df05bad2a87f9a553297a87274a85ae74
 │  │  ├─ 16
 │  │  │  ├─ 595548489e6d7dd7077fd97a36f329d7b9bed5
-│  │  │  └─ 85fe3779d97baf6e1c7e9d0a0a48c7ffa6a89e
+│  │  │  ├─ 85fe3779d97baf6e1c7e9d0a0a48c7ffa6a89e
+│  │  │  └─ f4082a33418c6ff95b8845a6489ae4b3b01d03
 │  │  ├─ 18
 │  │  │  └─ 9e6bf7b8559a8687fc9b2897fcf6ed8e3c4c7b
 │  │  ├─ 1a
 │  │  │  └─ 4593ac2a52473e909ec9cc78edc8a8dfa2a897
+│  │  ├─ 1b
+│  │  │  └─ 50331a38d52bc2b35e936c314f26f8897e9930
 │  │  ├─ 1d
-│  │  │  └─ ca9a14bb9342ca603d2c6acd3d619c7e750a49
+│  │  │  ├─ ca9a14bb9342ca603d2c6acd3d619c7e750a49
+│  │  │  └─ d095a5564b6c96895ad527991114101c9fa7e2
 │  │  ├─ 20
 │  │  │  └─ a7f23c06a10f6537f782eb0743b5063ac5fbe3
 │  │  ├─ 22
@@ -87,6 +94,8 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 14de71025d80f4d06e15ba23fde674586fc273
 │  │  ├─ 3e
 │  │  │  └─ 068984c0aa818851aae2a174102a98f07d01d4
+│  │  ├─ 3f
+│  │  │  └─ 41110d1d4e88ed2aba81cbf8b76e32db0b09e7
 │  │  ├─ 43
 │  │  │  └─ 140877d9a81b29128a9b438125567bb85511f9
 │  │  ├─ 45
@@ -98,6 +107,8 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 7b87c555121460dd1da946afcba37c1560b082
 │  │  ├─ 4b
 │  │  │  └─ b026e3b4fbc4f37381c2183e3956daa75e5113
+│  │  ├─ 51
+│  │  │  └─ a152311fc81eb346a6c66ee05b09fe1200f1d7
 │  │  ├─ 53
 │  │  │  └─ 714d1101f7a412515abf1d0c29ceb0c70164bb
 │  │  ├─ 54
@@ -112,6 +123,8 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 28a5478e481155dfd4f57f663a7c3d2eb9ff14
 │  │  ├─ 5a
 │  │  │  └─ 41cfe864becb0e7af795cd27463e190c0547c0
+│  │  ├─ 5d
+│  │  │  └─ cd40bcf93ab4a280cea47725b8c6949d2e3718
 │  │  ├─ 5f
 │  │  │  └─ 9845beee2419304341eaa32348cb6a731f1f60
 │  │  ├─ 63
@@ -134,6 +147,7 @@ pusatoleholeh-backend-tim
 │  │  ├─ 77
 │  │  │  └─ 802f092ae28be3600a13e9cb8d185bb3e851ee
 │  │  ├─ 79
+│  │  │  ├─ f1eceb2d24e4c72053f1ae3318a048dacee750
 │  │  │  └─ f7886e3ad3a34be267dd4271b8e1cd403f7e0f
 │  │  ├─ 7a
 │  │  │  └─ a64c4e39620249a3f005ad87f2c4f28b66f39c
@@ -156,6 +170,8 @@ pusatoleholeh-backend-tim
 │  │  │  ├─ 427f2215e318df274beb5ff16862d2ebacba6c
 │  │  │  ├─ 86d3fd24427319f8c6b4edb71f43c3ae309fa4
 │  │  │  └─ c1dba9699c4ab83e31e23960401d257ea76882
+│  │  ├─ 91
+│  │  │  └─ dfc725abde431d6ac75703620dd53534859dbe
 │  │  ├─ 96
 │  │  │  └─ f9aeaea43738225dbf8a627e75c9ff5c4b1a92
 │  │  ├─ 97
@@ -180,6 +196,10 @@ pusatoleholeh-backend-tim
 │  │  │  └─ 5ac23ce6a001315736125a2c91a6170e192403
 │  │  ├─ be
 │  │  │  └─ 0001c076b1f02787681ff156d29613adac0d07
+│  │  ├─ c2
+│  │  │  └─ 8596d5a70db6a6022933d0671f2a0a6add1849
+│  │  ├─ ca
+│  │  │  └─ 5ce0de1963ece3fdbe3073e987baded7c12e35
 │  │  ├─ cc
 │  │  │  └─ f1948671c00112e6c6d67a2b7fabe0d31f2cb3
 │  │  ├─ ce
@@ -200,8 +220,11 @@ pusatoleholeh-backend-tim
 │  │  │  └─ eca506f849f2cc282d0f348ba4f90a4584f12e
 │  │  ├─ e0
 │  │  │  └─ 18292ce8c164009d953cde5db9806cbf8d43fb
+│  │  ├─ e2
+│  │  │  └─ a682aa9ac48a932ea272f0e8f15d27df53efd3
 │  │  ├─ e6
-│  │  │  └─ 580983a25bdb59101f16328754a33229007426
+│  │  │  ├─ 580983a25bdb59101f16328754a33229007426
+│  │  │  └─ 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 │  │  ├─ e8
 │  │  │  └─ d2c771da17a9075308f1f99fc21880552d0168
 │  │  ├─ eb
@@ -250,6 +273,7 @@ pusatoleholeh-backend-tim
    │  ├─ auth.js
    │  ├─ cart.js
    │  ├─ courier.js
+   │  ├─ product.js
    │  ├─ review.js
    │  ├─ transaction.js
    │  └─ voucher.js

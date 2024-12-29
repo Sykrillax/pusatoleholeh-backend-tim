@@ -11,11 +11,14 @@ import { safeRoute, verifyRole } from '../middlewares/middleware.js';
 
 const router = express.Router();
 
-router.get('/', safeRoute, verifyRole('seller'), getAllVouchers);
-router.get('/:voucherId', safeRoute, verifyRole('seller'), getVoucherById);
-router.post('/create', safeRoute, verifyRole('seller'), createVoucher);
-router.put('/update/:voucherId', safeRoute, verifyRole('seller'), updateVoucher);
-router.delete('/delete/:voucherId', safeRoute, verifyRole('seller'), deleteVoucher);
-router.patch('/toggle/:voucherId', safeRoute, verifyRole('seller'), toggleVoucherStatus);
+// Buyer-side routes
+router.get('/', safeRoute, getAllVouchers);
+router.get('/:voucherId', safeRoute, getVoucherById);
+
+// Admin-side routes
+router.post('/create', safeRoute, verifyRole('admin'), createVoucher);
+router.put('/update/:voucherId', safeRoute, verifyRole('admin'), updateVoucher);
+router.delete('/delete/:voucherId', safeRoute, verifyRole('admin'), deleteVoucher);
+router.patch('/toggle/:voucherId', safeRoute, verifyRole('admin'), toggleVoucherStatus);
 
 export default router;

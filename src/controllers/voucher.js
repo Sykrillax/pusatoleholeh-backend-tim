@@ -1,17 +1,14 @@
 import Voucher from '../models/voucher.js';
 
-// Get all vouchers
+// Get all active vouchers (Buyer-side)
 export const getAllVouchers = async (req, res) => {
-    try {
-      // Jika ingin menampilkan semua vouchers tanpa filter
-      const vouchers = await Voucher.find({ isActive: true });
-  
-      res.status(200).json(vouchers);
-    } catch (error) {
-      res.status(500).json({ message: 'Server error.', error: error.message });
-    }
-  };
-  
+  try {
+    const vouchers = await Voucher.find({ isActive: true, expired: { $gte: new Date() } });
+    res.status(200).json(vouchers);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error.', error: error.message });
+  }
+};
 
 // Get voucher by ID
 export const getVoucherById = async (req, res) => {
@@ -29,14 +26,13 @@ export const getVoucherById = async (req, res) => {
   }
 };
 
-// Create a new voucher
+// Create a new voucher (Admin only)
 export const createVoucher = async (req, res) => {
   try {
-    const { name, shopId, quantity, discount, minPurchase, expired, isActive } = req.body;
+    const { name, quantity, discount, minPurchase, expired, isActive } = req.body;
 
     const voucher = new Voucher({
       name,
-      shopId,
       quantity,
       discount,
       minPurchase,
@@ -51,7 +47,7 @@ export const createVoucher = async (req, res) => {
   }
 };
 
-// Update voucher
+// Update voucher (Admin only)
 export const updateVoucher = async (req, res) => {
   try {
     const { voucherId } = req.params;
@@ -76,7 +72,7 @@ export const updateVoucher = async (req, res) => {
   }
 };
 
-// Delete voucher
+// Delete voucher (Admin only)
 export const deleteVoucher = async (req, res) => {
   try {
     const { voucherId } = req.params;
@@ -92,7 +88,7 @@ export const deleteVoucher = async (req, res) => {
   }
 };
 
-// Toggle voucher active status
+// Toggle voucher active status (Admin only)
 export const toggleVoucherStatus = async (req, res) => {
   try {
     const { voucherId } = req.params;

@@ -1,12 +1,16 @@
 import mongoose from 'mongoose';
 import Cart from '../models/cart.js';
 import Product from '../models/product.js';
+import Shop from '../models/shop.js';
+import ProductImage from '../models/productImage.js';
+import ProductCover from '../models/productCover.js';
 import { createAlert } from './alert.js';
 
 // ADD PRODUCT TO CART
 export const addToCart = async (req, res) => {
   try {
     const { productId, quantity } = req.params;
+    const userId = req.user._id;
 
     const quantityInt = parseInt(quantity, 10);
     if (isNaN(quantityInt) || quantityInt <= 0) {
@@ -22,10 +26,17 @@ export const addToCart = async (req, res) => {
       return res.status(400).json({ message: `Only ${product.stock} items available in stock.` });
     }
 
-    const existingCartItem = await Cart.findOne({ userId: req.user._id, productId });
+    const shop = await Shop.findById(product.shopId);
+    if (!shop) {
+      return res.status(404).json({ message: 'Shop not found.' });
+    }
+
+    const productCover = await ProductCover.findOne({ productId }).select('url');
+    const productImages = await ProductImage.find({ productId }).select('url');
+
+    const existingCartItem = await Cart.findOne({ userId, productId });
     if (existingCartItem) {
       const newQuantity = existingCartItem.quantity + quantityInt;
-
       if (newQuantity > product.stock) {
         return res.status(400).json({ message: `Adding exceeds stock. Only ${product.stock} items available.` });
       }
@@ -36,13 +47,31 @@ export const addToCart = async (req, res) => {
     }
 
     const cartItem = new Cart({
-      userId: req.user._id,
+      userId,
       productId,
+      shopId: shop._id,
+      shopName: shop.name,
+      productCover: productCover?.url || null,
+      productImage: productImages.map(img => img.url),
       quantity: quantityInt,
     });
 
     await cartItem.save();
     res.status(201).json({ message: 'Product added to cart.', cart: cartItem });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error.', error: error.message });
+  }
+};
+
+// GET CART ITEMS
+export const getCart = async (req, res) => {
+  try {
+    const cart = await Cart.find({ userId: req.user._id }).populate('productId', 'name price stock');
+    if (!cart.length) {
+      return res.status(200).json({ message: "Your cart is empty. Let's add some stuff!", cart: [] });
+    }
+
+    res.status(200).json(cart);
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
@@ -99,20 +128,6 @@ export const clearCart = async (req, res) => {
 
     await Cart.deleteMany({ userId: req.user._id });
     res.status(200).json({ message: 'All items removed from cart.' });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error.', error: error.message });
-  }
-};
-
-// GET CART ITEMS
-export const getCart = async (req, res) => {
-  try {
-    const cart = await Cart.find({ userId: req.user._id }).populate('productId', 'name price stock');
-    if (!cart.length) {
-      return res.status(200).json({ message: "Your cart is empty. Let's add some stuff!", cart: [] });
-    }
-
-    res.status(200).json(cart);
   } catch (error) {
     res.status(500).json({ message: 'Server error.', error: error.message });
   }
